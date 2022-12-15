@@ -12,19 +12,27 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [numVotes, setNumVotes] = useState([0,0,0,0,0,0,0])
 
   function selectNext() {
-    let nextAnecdote = Math.floor(Math.random() * anecdotes.length);
-    console.log(selected)
-    setSelected(nextAnecdote);
-    console.log(selected)
+    let nextAnecdote = Math.floor(Math.random() * anecdotes.length);    
+    setSelected(nextAnecdote);    
   }
+
+  function addVotes(ind) {
+    const copy = [...numVotes]
+    copy[ind]+=1
+    setNumVotes(copy);
+  }
+
 
   return (
     <div>
       <div>
       {anecdotes[selected]}
       </div>
+      <div>has {numVotes[selected]} votes</div>
+      <button onClick={()=>addVotes(selected)}>vote</button>
       <button onClick={()=>selectNext()}>next anecdote</button>
     </div>
   )
